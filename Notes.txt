@@ -1,0 +1,36 @@
+Flight Class:
+
+Flight class contains the basic information about a flight like flightNumber, source, destination, totalSeats, and availableSeats.
+Methods like getFlightInfo(), bookSeat(), and cancelBooking() are used to get flight details, book a seat, and cancel a booking.
+AirlineReservationSystemGUI Class:
+
+This class is responsible for creating the GUI and handling user interactions.
+GUI Components:
+JTextArea for displaying flight details and user bookings.
+JButton for performing actions (view flights, book, cancel, exit).
+JScrollPane to allow scrolling for larger areas of text.
+JPanel for organizing components in the layout.
+Methods:
+displayAvailableFlights(): Displays available flights and their seat statuses.
+bookFlight(): Prompts the user to enter a flight number and tries to book a seat.
+cancelBooking(): Prompts the user to enter a flight number and cancels a booking.
+viewMyBookings(): Displays the user's current bookings (for simplicity, this is done by showing flights that have been booked).
+Event Handling:
+
+actionPerformed(): Handles the button clicks and triggers corresponding actions such as viewing flights, booking, canceling, and exiting.
+Sample Output (GUI):
+Flight Details Section: A JTextArea displaying available flight details.
+Buttons: Options to view flights, book a flight, cancel a booking, or exit the program.
+Bookings Section: Shows booked flights if any.
+How it Works:
+View Flights: Displays available flights with seat details.
+Book a Flight: Takes flight number input and books a seat if available.
+Cancel a Booking: Takes flight number input and cancels the booking, freeing up a seat.
+Exit: Exits the application.
+Enhancements:
+You can further enhance the system by adding user authentication (for keeping track of users), integrating a database for persistent storage, and improving the UI layout for a better user experience.
+Let me know if you'd like more features or further explanation!
+
+
+
+You said:
