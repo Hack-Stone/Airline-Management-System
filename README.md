@@ -93,27 +93,3 @@ AirlineReservationSystemGUI: Main GUI class using Java Swing.
 
 ---
 
-🔄 Future Enhancements
-
-Add user login and profile management
-
-Store bookings in a database or file
-
-Add seat selection and booking history
-
-Improve GUI design with custom styling
-
-
-
----
-
-🤝 Contributing
-
-Contributions are welcome! Feel free to fork this repository and submit a pull request.
-
-
----
-
-📄 License
-
-This project is open-source and available under the MIT License.
