@@ -231,3 +231,170 @@ Next, we'll dive deeper into how all these parts come together to form the compl
 ---
 
 <sub><sup>**References**: [[1]](https://github.com/Hack-Stone/Airline-Management-System/blob/ad4c984c7ac62b7ff91058a5eca9668a5a4cf1c3/AirlineReservationSystemGUI.java), [[2]](https://github.com/Hack-Stone/Airline-Management-System/blob/ad4c984c7ac62b7ff91058a5eca9668a5a4cf1c3/Notes.txt)</sup></sub>
+
+# Chapter 2: Airline Reservation System Application
+
+Welcome back! In [Chapter 1: Graphical User Interface (GUI)](01_graphical_user_interface__gui__.md), we learned about the friendly "face" of our Airline Management System – the buttons, text areas, and windows that you see and click on. But a friendly face isn't enough; we need a "brain" behind it that actually *does* things!
+
+### What is the Airline Reservation System Application?
+
+Imagine you're at the airport's main desk. You see screens (the GUI), and there are people (the underlying code) ready to help you. The entire desk, with all its computers, forms, and helpful staff, working together to manage flights and bookings, is like our **Airline Reservation System Application**.
+
+This "Application" is the **central program** that brings all the pieces of our airline system together. It's the overall manager. It tells the GUI what to show, it knows about all the available flights, it handles booking and canceling tickets, and it keeps track of your reservations.
+
+**The big problem it solves:** How do we make sure that when you click a "Book Flight" button (from the GUI), the system actually finds a flight, checks for available seats, updates the booking, and then shows you that it was successful? The Airline Reservation System Application is the conductor of this entire orchestra.
+
+Let's think of a common task: **"A passenger wants to book a flight."** This is a perfect example of what our application manages from start to finish.
+
+### The Main Program: Bringing It All Together
+
+Our `AirlineReservationSystemGUI.java` file isn't just about the GUI; it actually *is* our "Airline Reservation System Application." It's one big program that contains everything needed to run the system.
+
+When you run our program, what really happens?
+
+#### 1. Starting the Application
+
+Every Java program needs a starting point, like a "power on" button. This is done by a special part of the code called the `main` method.
+
+```java
+// File: AirlineReservationSystemGUI.java
+public class AirlineReservationSystemGUI extends JFrame implements ActionListener {
+    // ... other code ...
+
+    public static void main(String[] args) {
+        // This is where our entire application starts!
+        SwingUtilities.invokeLater(() -> {
+            new AirlineReservationSystemGUI().setVisible(true); // Create and show the main window
+        });
+    }
+}
+```
+**What this code does:** The `main` method is like opening the airport's main desk for the day. It creates a new `AirlineReservationSystemGUI` object (which is our main window and the brain behind it) and then makes it visible on your computer screen. Once it's visible, the application is running and ready for you to interact with it!
+
+#### 2. Setting Up the Application
+
+When the `AirlineReservationSystemGUI` is created, it needs to set itself up. This happens in its **constructor** (a special method that runs when a new object is created).
+
+```java
+// File: AirlineReservationSystemGUI.java
+public class AirlineReservationSystemGUI extends JFrame implements ActionListener {
+    // ... variables for GUI components and flights ...
+    private Flight[] flights = new Flight[3]; // To store our flights
+
+    // Constructor: This runs when `new AirlineReservationSystemGUI()` is called
+    public AirlineReservationSystemGUI() {
+        // 1. Prepare some flights for our system
+        flights[0] = new Flight("AA101", "New York", "Los Angeles", 100);
+        flights[1] = new Flight("AA102", "Chicago", "San Francisco", 150);
+        // ... more flights ...
+
+        // 2. Setup the main window (as learned in Chapter 1)
+        setTitle("Airline Reservation System");
+        setSize(600, 400);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
+
+        // 3. Create and add all GUI buttons, text areas, etc.
+        // ... code to initialize flightDetailsArea, buttons, etc. ...
+
+        // 4. Tell buttons what to do when clicked
+        btnViewFlights.addActionListener(this);
+        btnBookFlight.addActionListener(this);
+        // ... more button listeners ...
+    }
+    // ... rest of the class ...
+}
+```
+**What this code does:** When the application starts, this constructor is like the airport manager setting up the desk.
+1.  It creates a few sample flights (we'll learn more about `Flight` in [Chapter 3: Flight Entity](03_flight_entity_.md)).
+2.  It sets up the main window (its title, size, and how it closes).
+3.  It creates all the visual parts of the GUI (text areas, buttons, etc.) and places them on the window.
+4.  Crucially, it prepares the buttons to *listen* for clicks, so when you click "Book Flight," the system knows to react (this "listening" is called event handling, which we'll explore in [Chapter 6: Event Handling Mechanism](06_event_handling_mechanism_.md)).
+
+### How the Application Manages "Booking a Flight"
+
+Let's trace our use case: **"A passenger wants to book a flight."**
+
+When you, the user, interact with the system, the `AirlineReservationSystemGUI` application coordinates everything.
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant GUI (Your Screen)
+    participant Airline App (The Brain)
+    participant Flight Catalog (Flight Info)
+
+    User->>GUI (Your Screen): Clicks "Book Flight"
+    GUI (Your Screen)->>Airline App (The Brain): Button clicked
+    Airline App (The Brain)->>User: Pop-up "Enter Flight Number"
+    User->>Airline App (The Brain): Types "AA101" and presses OK
+    Airline App (The Brain)->>Flight Catalog (Flight Info): Find Flight "AA101"
+    Flight Catalog (Flight Info)-->>Airline App (The Brain): Here is Flight AA101 details
+    Airline App (The Brain)->>Flight Catalog (Flight Info): Try to book a seat on AA101
+    Flight Catalog (Flight Info)-->>Airline App (The Brain): Seat booked successfully!
+    Airline App (The Brain)->>GUI (Your Screen): Update flight list and show "Booking successful"
+    GUI (Your Screen)->>User: Display updated flights and success message
+```
+
+**Step-by-step Explanation:**
+
+1.  **User Action:** You, the `User`, click the "Book Flight" button on the `GUI (Your Screen)`.
+2.  **GUI Notifies Application:** The `GUI` (our `AirlineReservationSystemGUI` instance) detects this click and tells the main `Airline App (The Brain)` that the "Book Flight" action has occurred.
+3.  **Application Asks for Input:** The `Airline App` then uses a small pop-up window (`JOptionPane`) to ask you for the specific flight number you want to book.
+4.  **User Provides Input:** You type "AA101" (or any flight number) and press OK.
+5.  **Application Finds Flight:** The `Airline App` then goes to its `Flight Catalog` (which is just the list of `Flight` objects it holds) and searches for the flight "AA101".
+6.  **Flight Details Returned:** The `Flight Catalog` provides the details of "AA101" back to the `Airline App`.
+7.  **Application Tries to Book:** The `Airline App` tells the found `Flight` object to `bookSeat()`. The `Flight` object checks if there are seats and updates its `availableSeats` count.
+8.  **Booking Result:** The `Flight` object reports back to the `Airline App` whether the booking was successful.
+9.  **Application Updates GUI:** Based on the booking result, the `Airline App` updates the `GUI` (by calling `displayAvailableFlights()` and `JOptionPane.showMessageDialog()`).
+10. **GUI Shows Result:** The `GUI` then updates the `JTextArea` with the new flight details (showing one less seat for AA101) and displays a "Booking successful!" message to the `User`.
+
+This entire process, from your click to the final message, is managed and coordinated by the `Airline Reservation System Application` (our `AirlineReservationSystemGUI` class).
+
+#### The Booking Code in Action
+
+Let's look at a simplified version of the `bookFlight` method within our `AirlineReservationSystemGUI` class:
+
+```java
+// File: AirlineReservationSystemGUI.java
+// ... inside AirlineReservationSystemGUI class ...
+private void bookFlight() {
+    // 1. Get flight number from the user via a pop-up
+    String flightNumber = JOptionPane.showInputDialog(this, "Enter Flight Number to Book:");
+    if (flightNumber == null || flightNumber.trim().isEmpty()) {
+        return; // User cancelled or entered nothing
+    }
+
+    // 2. Loop through all our flights to find the one
+    for (Flight flight : flights) { // 'flights' is the array of Flight objects
+        if (flight.flightNumber.equals(flightNumber.trim())) {
+            // 3. If found, try to book a seat
+            if (flight.bookSeat()) { // This calls a method on the Flight object itself
+                JOptionPane.showMessageDialog(this, "Booking successful!");
+                displayAvailableFlights(); // Update the display
+                return; // Job done
+            } else {
+                JOptionPane.showMessageDialog(this, "Sorry, no seats available.");
+                return; // Job done
+            }
+        }
+    }
+    // If we reach here, flight was not found
+    JOptionPane.showMessageDialog(this, "Flight not found.");
+}
+```
+**What this code does:** This method is the "how-to-book-a-flight" guide for our application.
+1.  It first pops up a window asking for the flight number.
+2.  Then, it looks through all the flights it knows about (stored in the `flights` array).
+3.  When it finds the matching flight, it tells that specific `Flight` object to "book a seat" using `flight.bookSeat()`. (We'll see how `Flight` manages seats in [Chapter 5: Seat Management](05_seat_management_.md)).
+4.  Finally, it tells the user if the booking worked or failed, and updates the flight list on the screen.
+
+### Conclusion
+
+In this chapter, we've understood that the **Airline Reservation System Application** is the main program that acts as the central control for our entire system. It's not just the visual GUI, but the "brain" that coordinates all actions, manages flight data, processes bookings, and makes sure everything runs smoothly. We saw how it starts, sets itself up, and orchestrates tasks like booking a flight, bringing together the GUI, flight information, and booking rules.
+
+Next, we'll zoom in on one of the most important pieces of information the application manages: the details about each [Flight Entity](03_flight_entity_.md) itself!
+
+---
+
+<sub><sup>**References**: [[1]](https://github.com/Hack-Stone/Airline-Management-System/blob/ad4c984c7ac62b7ff91058a5eca9668a5a4cf1c3/AirlineReservationSystemGUI.java), [[2]](https://github.com/Hack-Stone/Airline-Management-System/blob/ad4c984c7ac62b7ff91058a5eca9668a5a4cf1c3/Notes.txt)</sup></sub>
