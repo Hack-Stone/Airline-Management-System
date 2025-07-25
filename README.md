@@ -1,95 +1,46 @@
-# ✈️ Airline Reservation System GUI (Java Swing)
+# Tutorial: Airline-Management-System
 
-A simple and interactive Airline Reservation System built using **Java Swing**. This project allows users to:
-
-- View available flights
-- Book a flight
-- Cancel a booking
-- View current bookings
-
-It is a beginner-friendly GUI application showcasing core Java concepts like **OOP**, **event handling**, and **Swing components**.
-
----
-
-## 🧰 Features
-
-- 🛫 View real-time flight listings
-- 🎫 Book seats (if available)
-- ❌ Cancel bookings
-- 📋 See your active bookings
-- 🖥️ User-friendly interface with Java Swing
-
----
-
-## 🏗️ Technologies Used
-
-- Java
-- Java Swing (GUI Framework)
-- Object-Oriented Programming (OOP)
-
----
-
-## 📦 How to Run
-
-### Prerequisites
-
-- Java JDK 8 or above
-- Any Java IDE (like IntelliJ IDEA, Eclipse, VS Code) or terminal
-
-### Steps
-
-1. **Clone the Repository**
-   ```bash
-   git clone https://github.com/yourusername/airline-reservation-system.git
-   cd airline-reservation-system
+This project is an **Airline Reservation System** that lets you easily *manage your flight bookings*. You can **view available flights**, *book a seat* on a specific flight, or even **cancel a reservation** if your plans change, all through a simple visual interface.
 
 
-   🧩 Project Structure
+## Visual Overview
 
-AirlineReservationSystemGUI.java
-README.md
+```mermaid
+flowchart TD
+    A0["Flight Entity
+"]
+    A1["Airline Reservation System Application
+"]
+    A2["Seat Management
+"]
+    A3["Graphical User Interface (GUI)
+"]
+    A4["Event Handling Mechanism
+"]
+    A5["Flight Catalog
+"]
+    A1 -- "Manages" --> A0
+    A0 -- "Implements" --> A2
+    A1 -- "Presents" --> A3
+    A3 -- "Triggers" --> A4
+    A4 -- "Invokes methods in" --> A1
+    A1 -- "Uses" --> A5
+```
 
-Flight: A class representing flight details and operations (booking, canceling).
+## Chapters
 
-AirlineReservationSystemGUI: Main GUI class using Java Swing.
-
-
-
----
-
-🔄 Future Enhancements
-
-Add user login and profile management
-
-Store bookings in a database or file
-
-Add seat selection and booking history
-
-Improve GUI design with custom styling
-
-
-
----
-
-🤝 Contributing
-
-Contributions are welcome! Feel free to fork this repository and submit a pull request.
-
-
----
-
-📄 License
-
-This project is open-source and available under the MIT License.🧩 Project Structure
-
-AirlineReservationSystemGUI.java
-README.md
-
-Flight: A class representing flight details and operations (booking, canceling).
-
-AirlineReservationSystemGUI: Main GUI class using Java Swing.
-
-
+1. [Graphical User Interface (GUI)
+](01_graphical_user_interface__gui__.md)
+2. [Airline Reservation System Application
+](02_airline_reservation_system_application_.md)
+3. [Flight Entity
+](03_flight_entity_.md)
+4. [Flight Catalog
+](04_flight_catalog_.md)
+5. [Seat Management
+](05_seat_management_.md)
+6. [Event Handling Mechanism
+](06_event_handling_mechanism_.md)
 
 ---
 
