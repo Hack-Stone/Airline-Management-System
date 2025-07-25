@@ -29,17 +29,17 @@ flowchart TD
 
 ## Chapters
 
-1. [Graphical User Interface (GUI)
+1. Graphical User Interface (GUI)
 
-2. [Airline Reservation System Application
+2. Airline Reservation System Application
 
-3. [Flight Entity
+3. Flight Entity
 
-4. [Flight Catalog
+4. Flight Catalog
 
-5. [Seat Management
+5. Seat Management
 
-6. [Event Handling Mechanism
+6. Event Handling Mechanism
 
 
 ---
